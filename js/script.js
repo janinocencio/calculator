@@ -1,25 +1,34 @@
 function add(a,b) {
-    return a+b;
+    return +a + +b;
 };
 
 function subtract(a,b) {
-    return a-b;
+    return +a - +b;
 };
 
 function multiply(a,b) {
-    return a*b;
+    return +a * +b;
 };
 
 function divide(a,b) {
-   return Math.round((a/b)*100)/100
+   return Math.round((+a/+b)*100)/100
 };
 
 function operate(a,operator,b) {
     if (operator === "+") return add(a,b);
     if (operator === "-") return subtract(a,b);
-    if (operator === "*") return multiply(a,b);
-    if (operator === "/") return divide(a,b);
+    if (operator === "x") return multiply(a,b);
+    if (operator === "÷") return divide(a,b);
 };
+
+function categorizeString(displayText) {
+    if (displayText.includes("+") === true ||
+        displayText.includes("-") === true ||
+        displayText.includes("x") === true ||
+        displayText.includes("÷") === true) {
+        return displayText.split(" "); //returns array
+    }
+}
 
 const displayTop = document.querySelector('#display-top > p');
 
@@ -105,7 +114,10 @@ btnZero.addEventListener('click', () => {
 
 const btnEqual = document.querySelector('#equal');
 btnEqual.addEventListener('click', () => {
-    displayTop.textContent += " ="; 
+    displayTop.textContent += " =";
+    let numArray = categorizeString(displayTop.textContent);
+    let result = operate(numArray[0], numArray[1], numArray[2]);
+    displayBot.textContent = result;
  });
 
 const btnAdd = document.querySelector('#add');
