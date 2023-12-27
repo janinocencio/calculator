@@ -69,6 +69,19 @@ h1 {
     width: 100%;
     background: orange;
     margin-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    opacity: 75%;
+}
+
+.display > div {
+  text-align:right;
+  padding-right: 0.5rem;
+}
+
+#display-top > p {
+  font-size: 0.8rem;
 }
 
 .clr-del {
@@ -76,12 +89,33 @@ h1 {
     width: 100%;
     background: orange;
     margin-bottom: 5px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.clr-del > button {
+  height: 100%;
+  width: 50%;
+  border-radius: 5%;
 }
 
 .num-operator {
-    height: 200px;
-    width: 100%;
-    background: orange;
+  height: 200px;
+  width: 100%;
+  background: orange;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.num-operator > button {
+  height: 25%;
+  width: 25%;
+  border-radius: 10%;
+}
+
+button:hover {
+  background: gray;
+  opacity: 80%;
 }
 
 .footer {
