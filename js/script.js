@@ -21,6 +21,9 @@ function operate(a,operator,b) {
     if (operator === "/") return divide(a,b);
 };
 
+const displayTop = document.querySelector('#display-top > p');
+
+const displayBot = document.querySelector('#display-bot > p');
 
 const btnClear = document.querySelector('#clear');
 
@@ -30,7 +33,7 @@ const btnSeven = document.querySelector('#seven');
 
 const btnEight = document.querySelector('#eight');
 
-const btnSeven = document.querySelector('#nine');
+const btnNine = document.querySelector('#nine');
 
 const btnDivide = document.querySelector('#divide');
 
