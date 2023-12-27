@@ -91,7 +91,11 @@ btnSubtract.addEventListener('click', () => {
 
 const btnDot = document.querySelector('#dot');
 btnDot.addEventListener('click', () => {
-    displayTop.textContent += "."; 
+    if (displayTop.textContent.includes(".") === false) {
+        if (displayTop.textContent === "") {
+            displayTop.textContent += "0.";    
+        } else displayTop.textContent += ".";
+    };     
  });
 
 const btnZero = document.querySelector('#zero');
