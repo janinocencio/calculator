@@ -22,16 +22,45 @@ function operate(a,operator,b) {
 };
 
 function categorizeString(displayText) {
-    if (displayText.includes("+") === true ||
-        displayText.includes("-") === true ||
-        displayText.includes("x") === true ||
-        displayText.includes("÷") === true) {
+    if (displayText.includes("+") ||
+        displayText.includes("-") ||
+        displayText.includes("x") ||
+        displayText.includes("÷")) {
         return displayText.split(" "); //returns array
     }
 }
 
 function removeZeroDefault(displayBot) {
-    if (displayBot.textContent === "0") return displayBot.textContent = "";
+    if (displayBot.textContent === "0") displayBot.textContent = "";
+}
+
+function resetDisplay(displayTop, displayBot) {
+    if (displayTop.textContent.endsWith(" ")) displayBot.textContent = "0";
+    if (displayTop.textContent.endsWith("=")) {
+        displayTop.textContent = "";
+        displayBot.textContent = "0";
+    }
+}
+
+function isOperatorPresent(displayTop) {
+    if (displayText.includes("+") ||
+        displayText.includes("-") ||
+        displayText.includes("x") ||
+        displayText.includes("÷")) {
+        return true
+    };
+}
+
+function operatorConditions(displayTop, displayBot, operator) {
+    if (displayTop.textContent.endsWith("=")) {
+        displayTop.textContent = displayBot.textContent + operator;
+    }
+    if (Number.isFinite(displayTop.textContent)){
+        btnEqual.click();
+        displayTop.textContent = displayBot.textContent + operator;
+    }
+    if ()
+
 }
 
 const displayTop = document.querySelector('#display-top > p');
@@ -45,16 +74,26 @@ btnClear.addEventListener('click', () => {
 });
 
 const btnDelete = document.querySelector('#delete');
+btnDelete.addEventListener('click', () => {
+    if (displayBot.textContent != "0") {
+        displayBot.textContent = displayBot.textContent.slice(0,-1);
+    };
+    if (displayBot.textContent === "") {
+        displayBot.textContent = "0";
+    };
+});
 
 const btnSeven = document.querySelector('#seven');
 btnSeven.addEventListener('click', () => {
-   displayTop.textContent += "7";
-   removeZeroDefault(displayBot);
-   displayBot.textContent += "7"; 
+    resetDisplay(displayTop, displayBot);
+    displayTop.textContent += "7";
+    removeZeroDefault(displayBot);
+    displayBot.textContent += "7"; 
 });
 
 const btnEight = document.querySelector('#eight');
 btnEight.addEventListener('click', () => {
+    resetDisplay(displayTop, displayBot);
     displayTop.textContent += "8";
     removeZeroDefault(displayBot);
     displayBot.textContent += "8";  
@@ -62,6 +101,7 @@ btnEight.addEventListener('click', () => {
 
 const btnNine = document.querySelector('#nine');
 btnNine.addEventListener('click', () => {
+    resetDisplay(displayTop, displayBot);
     displayTop.textContent += "9";
     removeZeroDefault(displayBot);
     displayBot.textContent += "9"; 
@@ -74,6 +114,7 @@ btnDivide.addEventListener('click', () => {
 
 const btnFour = document.querySelector('#four');
 btnFour.addEventListener('click', () => {
+    resetDisplay(displayTop, displayBot);
     displayTop.textContent += "4";
     removeZeroDefault(displayBot);
     displayBot.textContent += "4";  
@@ -81,6 +122,7 @@ btnFour.addEventListener('click', () => {
 
 const btnFive = document.querySelector('#five');
 btnFive.addEventListener('click', () => {
+    resetDisplay(displayTop, displayBot);
     displayTop.textContent += "5";
     removeZeroDefault(displayBot);
     displayBot.textContent += "5"; 
@@ -88,6 +130,7 @@ btnFive.addEventListener('click', () => {
 
 const btnSix = document.querySelector('#six');
 btnSix.addEventListener('click', () => {
+    resetDisplay(displayTop, displayBot);
     displayTop.textContent += "6";
     removeZeroDefault(displayBot); 
     displayBot.textContent += "6"; 
@@ -100,6 +143,7 @@ btnMultiply.addEventListener('click', () => {
 
 const btnOne = document.querySelector('#one');
 btnOne.addEventListener('click', () => {
+    resetDisplay(displayTop, displayBot);
     displayTop.textContent += "1";
     removeZeroDefault(displayBot); 
     displayBot.textContent += "1"; 
@@ -107,6 +151,7 @@ btnOne.addEventListener('click', () => {
 
 const btnTwo = document.querySelector('#two');
 btnTwo.addEventListener('click', () => {
+    resetDisplay(displayTop, displayBot);
     displayTop.textContent += "2";
     removeZeroDefault(displayBot); 
     displayBot.textContent += "2";
@@ -114,6 +159,7 @@ btnTwo.addEventListener('click', () => {
 
 const btnThree = document.querySelector('#three');
 btnThree.addEventListener('click', () => {
+    resetDisplay(displayTop, displayBot);
     displayTop.textContent += "3";
     removeZeroDefault(displayBot); 
     displayBot.textContent += "3";
@@ -135,6 +181,7 @@ btnDot.addEventListener('click', () => {
 
 const btnZero = document.querySelector('#zero');
 btnZero.addEventListener('click', () => {
+    resetDisplay(displayTop, displayBot);
     displayTop.textContent += "0";
     removeZeroDefault(displayBot); 
     displayBot.textContent += "0"; 
