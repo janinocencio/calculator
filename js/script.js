@@ -208,7 +208,7 @@ btnAdd.addEventListener('click', () => {
     if (numArray[0] != undefined &&
         numArray[1] != undefined &&
         numArray[2] != undefined &&
-        numArray[2] != "") { 
+        numArray[2] != "") { //an empty array is created when the string ends with the split element
         btnEqual.click(); 
     }
     if (displayTop.textContent.endsWith("=")) {
@@ -218,3 +218,4 @@ btnAdd.addEventListener('click', () => {
         displayTop.textContent += " + ";  
     } else displayTop.textContent += " + ";    
  });
+ 
