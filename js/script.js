@@ -21,12 +21,12 @@ function operate(a,operator,b) {
     if (operator === "÷") return divide(a,b);
 };
 
-function categorizeString(displayText) {
-    if (displayText.includes("+") ||
-        displayText.includes("-") ||
-        displayText.includes("x") ||
-        displayText.includes("÷")) {
-        return displayText.split(" "); //returns array
+function categorizeString(displayTop) {
+    if (displayTop.textContent.includes("+") ||
+        displayTop.textContent.includes("-") ||
+        displayTop.textContent.includes("x") ||
+        displayTop.textContent.includes("÷")) {
+        return displayTop.textContent.split(" "); //returns array
     }
 }
 
@@ -43,10 +43,10 @@ function resetDisplay(displayTop, displayBot) {
 }
 
 function isOperatorPresent(displayTop) {
-    if (displayText.includes("+") ||
-        displayText.includes("-") ||
-        displayText.includes("x") ||
-        displayText.includes("÷")) {
+    if (displayTop.textContent.includes("+") ||
+        displayTop.textContent.includes("-") ||
+        displayTop.textContent.includes("x") ||
+        displayTop.textContent.includes("÷")) {
         return true
     };
 }
@@ -59,9 +59,7 @@ function operatorConditions(displayTop, displayBot, operator) {
         btnEqual.click();
         displayTop.textContent = displayBot.textContent + operator;
     }
-    if ()
-
-}
+};
 
 const displayTop = document.querySelector('#display-top > p');
 
@@ -109,6 +107,9 @@ btnNine.addEventListener('click', () => {
 
 const btnDivide = document.querySelector('#divide');
 btnDivide.addEventListener('click', () => {
+    if (isOperatorPresent(displayTop)) {
+        displayTop.textContent = displayTop.textContent.slice(0, -3)
+    }
     displayTop.textContent += " ÷ "; 
  });
 
@@ -138,6 +139,9 @@ btnSix.addEventListener('click', () => {
 
 const btnMultiply = document.querySelector('#multiply');
 btnMultiply.addEventListener('click', () => {
+    if (isOperatorPresent(displayTop)) {
+        displayTop.textContent = displayTop.textContent.slice(0, -3)
+    }
     displayTop.textContent += " x "; 
  });
 
@@ -167,6 +171,9 @@ btnThree.addEventListener('click', () => {
 
 const btnSubtract = document.querySelector('#subtract');
 btnSubtract.addEventListener('click', () => {
+    if (isOperatorPresent(displayTop)) {
+        displayTop.textContent = displayTop.textContent.slice(0, -3)
+    }
     displayTop.textContent += " - "; 
  });
 
@@ -190,12 +197,15 @@ btnZero.addEventListener('click', () => {
 const btnEqual = document.querySelector('#equal');
 btnEqual.addEventListener('click', () => {
     displayTop.textContent += " =";
-    let numArray = categorizeString(displayTop.textContent);
+    let numArray = categorizeString(displayTop);
     let result = operate(numArray[0], numArray[1], numArray[2]);
     displayBot.textContent = result;
  });
 
 const btnAdd = document.querySelector('#add');
 btnAdd.addEventListener('click', () => {
-    displayTop.textContent += " + "; 
+    if (isOperatorPresent(displayTop)) {
+        displayTop.textContent = displayTop.textContent.slice(0, -3)
+    }
+    displayTop.textContent += " + ";
  });
