@@ -206,11 +206,21 @@ btnSubtract.addEventListener('click', () => {
 
 const btnDot = document.querySelector('#dot');
 btnDot.addEventListener('click', () => {
-    if (displayTop.textContent.includes(".") === false) {
+    if (displayBot.textContent.includes(".") === false) {
+        displayBot.textContent += ".";
         if (displayTop.textContent === "") {
-            displayTop.textContent += "0.";    
+            displayTop.textContent += "0."
+        } else if (isOperatorPresent(displayTop)) {
+            displayBot.textContent = "0.";
+            displayTop.textContent += "0.";
+        } else if (displayTop.textContent.includes("=")) {
+            displayBot.textContent = "0.";
+            displayTop.textContent = "0.";
         } else displayTop.textContent += ".";
-    };     
+    } else if (isOperatorPresent(displayTop)) {
+        displayBot.textContent = "0.";
+        displayTop.textContent += "0.";
+    }  
  });
 
 const btnZero = document.querySelector('#zero');
