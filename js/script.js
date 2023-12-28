@@ -1,17 +1,17 @@
 function add(a,b) {
-    return +a + +b;
+    return Math.round((+a + +b) * 1e12) / 1e12;
 };
 
 function subtract(a,b) {
-    return +a - +b;
+    return Math.round((+a - +b) * 1e12) / 1e12;
 };
 
 function multiply(a,b) {
-    return +a * +b;
+    return Math.round((+a * +b) * 1e12) / 1e12;
 };
 
 function divide(a,b) {
-   return Math.round((+a/+b)*100)/100
+   return Math.round((+a / +b) * 100) / 100;
 };
 
 function operate(a,operator,b) {
