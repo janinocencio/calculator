@@ -75,6 +75,7 @@ const btnDelete = document.querySelector('#delete');
 btnDelete.addEventListener('click', () => {
     if (displayBot.textContent != "0") {
         displayBot.textContent = displayBot.textContent.slice(0,-1);
+        displayTop.textContent = displayTop.textContent.slice(0,-1);
     };
     if (displayBot.textContent === "") {
         displayBot.textContent = "0";
