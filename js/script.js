@@ -224,10 +224,15 @@ btnZero.addEventListener('click', () => {
 const btnEqual = document.querySelector('#equal');
 btnEqual.addEventListener('click', () => {
     if (displayTop.textContent.includes("=") === false) {
-        displayTop.textContent += " =";
-        const numArray = categorizeString(displayTop);
-        const result = operate(numArray[0], numArray[1], numArray[2]);
-        displayBot.textContent = result;
+        if (isOperatorPresent(displayTop)) {
+            displayTop.textContent = displayTop.textContent.slice(0, -3)
+            displayTop.textContent += " ="; 
+        } else {
+            displayTop.textContent += " =";
+            const numArray = categorizeString(displayTop);
+            const result = operate(numArray[0], numArray[1], numArray[2]);
+            displayBot.textContent = result;
+        }; 
     };
  });
 
