@@ -27,20 +27,20 @@ function categorizeString(displayTop) {
         displayTop.textContent.includes("x") ||
         displayTop.textContent.includes("÷")) {
         return displayTop.textContent.split(" "); //returns array
-    }
-}
+    };
+};
 
 function removeZeroDefault(displayBot) {
     if (displayBot.textContent === "0") displayBot.textContent = "";
-}
+};
 
 function resetDisplay(displayTop, displayBot) {
     if (displayTop.textContent.endsWith(" ")) displayBot.textContent = "0";
     if (displayTop.textContent.endsWith("=")) {
         displayTop.textContent = "";
         displayBot.textContent = "0";
-    }
-}
+    };
+};
 
 function isOperatorPresent(displayTop) {
     if (displayTop.textContent.endsWith(" + ") ||
@@ -49,7 +49,7 @@ function isOperatorPresent(displayTop) {
         displayTop.textContent.endsWith(" ÷ ")) {
         return true
     };
-}
+};
 
 function operatorConditions(displayTop, displayBot, operator) {
     if (displayTop.textContent.endsWith("=")) {
@@ -58,11 +58,10 @@ function operatorConditions(displayTop, displayBot, operator) {
     if (Number.isFinite(displayTop.textContent)){
         btnEqual.click();
         displayTop.textContent = displayBot.textContent + operator;
-    }
+    };
 };
 
 const displayTop = document.querySelector('#display-top > p');
-
 const displayBot = document.querySelector('#display-bot > p');
 
 const btnClear = document.querySelector('#clear');
@@ -80,6 +79,164 @@ btnDelete.addEventListener('click', () => {
     if (displayBot.textContent === "") {
         displayBot.textContent = "0";
     };
+});
+
+const btnDivide = document.querySelector('#divide');
+btnDivide.addEventListener('click', () => {
+    const numArray = displayTop.textContent.split(" ");
+    if (numArray[0] != undefined &&
+        numArray[1] != undefined &&
+        numArray[2] != undefined &&
+        numArray[2] != "") { //an empty array is created when the string ends with the split element
+        btnEqual.click(); 
+    }
+    if (displayTop.textContent.endsWith("=")) {
+        displayTop.textContent = displayBot.textContent + " ÷ ";
+    } else if (isOperatorPresent(displayTop)) {
+        displayTop.textContent = displayTop.textContent.slice(0, -3)
+        displayTop.textContent += " ÷ ";  
+    } else displayTop.textContent += " ÷ "; 
+});
+
+const btnMultiply = document.querySelector('#multiply');
+btnMultiply.addEventListener('click', () => {
+    const numArray = displayTop.textContent.split(" ");
+    if (numArray[0] != undefined &&
+        numArray[1] != undefined &&
+        numArray[2] != undefined &&
+        numArray[2] != "") { //an empty array is created when the string ends with the split element
+        btnEqual.click(); 
+    }
+    if (displayTop.textContent.endsWith("=")) {
+        displayTop.textContent = displayBot.textContent + " x ";
+    } else if (isOperatorPresent(displayTop)) {
+        displayTop.textContent = displayTop.textContent.slice(0, -3)
+        displayTop.textContent += " x ";  
+    } else displayTop.textContent += " x "; 
+});
+
+const btnSubtract = document.querySelector('#subtract');
+btnSubtract.addEventListener('click', () => {
+    const numArray = displayTop.textContent.split(" ");
+    if (numArray[0] != undefined &&
+        numArray[1] != undefined &&
+        numArray[2] != undefined &&
+        numArray[2] != "") { //an empty array is created when the string ends with the split element
+        btnEqual.click(); 
+    }
+    if (displayTop.textContent.endsWith("=")) {
+        displayTop.textContent = displayBot.textContent + " - ";
+    } else if (isOperatorPresent(displayTop)) {
+        displayTop.textContent = displayTop.textContent.slice(0, -3)
+        displayTop.textContent += " - ";  
+    } else displayTop.textContent += " - "; 
+});
+
+const btnAdd = document.querySelector('#add');
+btnAdd.addEventListener('click', () => {
+    const numArray = displayTop.textContent.split(" ");
+    if (numArray[0] != undefined &&
+        numArray[1] != undefined &&
+        numArray[2] != undefined &&
+        numArray[2] != "") { //an empty array is created when the string ends with the split element
+        btnEqual.click(); 
+    }
+    if (displayTop.textContent.endsWith("=")) {
+        displayTop.textContent = displayBot.textContent + " + ";
+    } else if (isOperatorPresent(displayTop)) {
+        displayTop.textContent = displayTop.textContent.slice(0, -3)
+        displayTop.textContent += " + ";  
+    } else displayTop.textContent += " + ";    
+});
+ 
+const btnEqual = document.querySelector('#equal');
+btnEqual.addEventListener('click', () => {
+    if (displayTop.textContent.includes("=") === false) {
+        if (isOperatorPresent(displayTop)) {
+            displayTop.textContent = displayTop.textContent.slice(0, -3)
+            displayTop.textContent += " ="; 
+        } else {
+            displayTop.textContent += " =";
+            const numArray = categorizeString(displayTop);
+            const result = operate(numArray[0], numArray[1], numArray[2]);
+            displayBot.textContent = result;
+        }; 
+    };
+});
+
+const btnDot = document.querySelector('#dot');
+btnDot.addEventListener('click', () => {
+    if (displayBot.textContent.includes(".") === false) {
+        displayBot.textContent += ".";
+        if (displayTop.textContent === "") {
+            displayTop.textContent += "0."
+        } else if (isOperatorPresent(displayTop)) {
+            displayBot.textContent = "0.";
+            displayTop.textContent += "0.";
+        } else if (displayTop.textContent.includes("=")) {
+            displayBot.textContent = "0.";
+            displayTop.textContent = "0.";
+        } else displayTop.textContent += ".";
+    } else if (isOperatorPresent(displayTop)) {
+        displayBot.textContent = "0.";
+        displayTop.textContent += "0.";
+    }  
+});
+
+const btnZero = document.querySelector('#zero');
+btnZero.addEventListener('click', () => {
+    resetDisplay(displayTop, displayBot);
+    displayTop.textContent += "0";
+    removeZeroDefault(displayBot); 
+    displayBot.textContent += "0"; 
+});
+
+const btnOne = document.querySelector('#one');
+btnOne.addEventListener('click', () => {
+    resetDisplay(displayTop, displayBot);
+    displayTop.textContent += "1";
+    removeZeroDefault(displayBot); 
+    displayBot.textContent += "1"; 
+});
+
+const btnTwo = document.querySelector('#two');
+btnTwo.addEventListener('click', () => {
+    resetDisplay(displayTop, displayBot);
+    displayTop.textContent += "2";
+    removeZeroDefault(displayBot); 
+    displayBot.textContent += "2";
+});
+
+const btnThree = document.querySelector('#three');
+btnThree.addEventListener('click', () => {
+    resetDisplay(displayTop, displayBot);
+    displayTop.textContent += "3";
+    removeZeroDefault(displayBot); 
+    displayBot.textContent += "3";
+});
+
+const btnFour = document.querySelector('#four');
+btnFour.addEventListener('click', () => {
+    resetDisplay(displayTop, displayBot);
+    displayTop.textContent += "4";
+    removeZeroDefault(displayBot);
+    displayBot.textContent += "4";  
+});
+
+const btnFive = document.querySelector('#five');
+btnFive.addEventListener('click', () => {
+    resetDisplay(displayTop, displayBot);
+    displayTop.textContent += "5";
+    removeZeroDefault(displayBot);
+    displayBot.textContent += "5"; 
+});
+
+const btnSix = document.querySelector('#six');
+btnSix.addEventListener('click', () => {
+    resetDisplay(displayTop, displayBot);
+    displayTop.textContent += "6";
+    removeZeroDefault(displayBot); 
+    displayBot.textContent += "6"; 
 });
 
 const btnSeven = document.querySelector('#seven');
@@ -105,162 +262,3 @@ btnNine.addEventListener('click', () => {
     removeZeroDefault(displayBot);
     displayBot.textContent += "9"; 
  });
-
-const btnDivide = document.querySelector('#divide');
-btnDivide.addEventListener('click', () => {
-    const numArray = displayTop.textContent.split(" ");
-    if (numArray[0] != undefined &&
-        numArray[1] != undefined &&
-        numArray[2] != undefined &&
-        numArray[2] != "") { //an empty array is created when the string ends with the split element
-        btnEqual.click(); 
-    }
-    if (displayTop.textContent.endsWith("=")) {
-        displayTop.textContent = displayBot.textContent + " ÷ ";
-    } else if (isOperatorPresent(displayTop)) {
-        displayTop.textContent = displayTop.textContent.slice(0, -3)
-        displayTop.textContent += " ÷ ";  
-    } else displayTop.textContent += " ÷ "; 
- });
-
-const btnFour = document.querySelector('#four');
-btnFour.addEventListener('click', () => {
-    resetDisplay(displayTop, displayBot);
-    displayTop.textContent += "4";
-    removeZeroDefault(displayBot);
-    displayBot.textContent += "4";  
- });
-
-const btnFive = document.querySelector('#five');
-btnFive.addEventListener('click', () => {
-    resetDisplay(displayTop, displayBot);
-    displayTop.textContent += "5";
-    removeZeroDefault(displayBot);
-    displayBot.textContent += "5"; 
- });
-
-const btnSix = document.querySelector('#six');
-btnSix.addEventListener('click', () => {
-    resetDisplay(displayTop, displayBot);
-    displayTop.textContent += "6";
-    removeZeroDefault(displayBot); 
-    displayBot.textContent += "6"; 
- });
-
-const btnMultiply = document.querySelector('#multiply');
-btnMultiply.addEventListener('click', () => {
-    const numArray = displayTop.textContent.split(" ");
-    if (numArray[0] != undefined &&
-        numArray[1] != undefined &&
-        numArray[2] != undefined &&
-        numArray[2] != "") { //an empty array is created when the string ends with the split element
-        btnEqual.click(); 
-    }
-    if (displayTop.textContent.endsWith("=")) {
-        displayTop.textContent = displayBot.textContent + " x ";
-    } else if (isOperatorPresent(displayTop)) {
-        displayTop.textContent = displayTop.textContent.slice(0, -3)
-        displayTop.textContent += " x ";  
-    } else displayTop.textContent += " x "; 
- });
-
-const btnOne = document.querySelector('#one');
-btnOne.addEventListener('click', () => {
-    resetDisplay(displayTop, displayBot);
-    displayTop.textContent += "1";
-    removeZeroDefault(displayBot); 
-    displayBot.textContent += "1"; 
- });
-
-const btnTwo = document.querySelector('#two');
-btnTwo.addEventListener('click', () => {
-    resetDisplay(displayTop, displayBot);
-    displayTop.textContent += "2";
-    removeZeroDefault(displayBot); 
-    displayBot.textContent += "2";
- });
-
-const btnThree = document.querySelector('#three');
-btnThree.addEventListener('click', () => {
-    resetDisplay(displayTop, displayBot);
-    displayTop.textContent += "3";
-    removeZeroDefault(displayBot); 
-    displayBot.textContent += "3";
- });
-
-const btnSubtract = document.querySelector('#subtract');
-btnSubtract.addEventListener('click', () => {
-    const numArray = displayTop.textContent.split(" ");
-    if (numArray[0] != undefined &&
-        numArray[1] != undefined &&
-        numArray[2] != undefined &&
-        numArray[2] != "") { //an empty array is created when the string ends with the split element
-        btnEqual.click(); 
-    }
-    if (displayTop.textContent.endsWith("=")) {
-        displayTop.textContent = displayBot.textContent + " - ";
-    } else if (isOperatorPresent(displayTop)) {
-        displayTop.textContent = displayTop.textContent.slice(0, -3)
-        displayTop.textContent += " - ";  
-    } else displayTop.textContent += " - "; 
- });
-
-const btnDot = document.querySelector('#dot');
-btnDot.addEventListener('click', () => {
-    if (displayBot.textContent.includes(".") === false) {
-        displayBot.textContent += ".";
-        if (displayTop.textContent === "") {
-            displayTop.textContent += "0."
-        } else if (isOperatorPresent(displayTop)) {
-            displayBot.textContent = "0.";
-            displayTop.textContent += "0.";
-        } else if (displayTop.textContent.includes("=")) {
-            displayBot.textContent = "0.";
-            displayTop.textContent = "0.";
-        } else displayTop.textContent += ".";
-    } else if (isOperatorPresent(displayTop)) {
-        displayBot.textContent = "0.";
-        displayTop.textContent += "0.";
-    }  
- });
-
-const btnZero = document.querySelector('#zero');
-btnZero.addEventListener('click', () => {
-    resetDisplay(displayTop, displayBot);
-    displayTop.textContent += "0";
-    removeZeroDefault(displayBot); 
-    displayBot.textContent += "0"; 
- });
-
-const btnEqual = document.querySelector('#equal');
-btnEqual.addEventListener('click', () => {
-    if (displayTop.textContent.includes("=") === false) {
-        if (isOperatorPresent(displayTop)) {
-            displayTop.textContent = displayTop.textContent.slice(0, -3)
-            displayTop.textContent += " ="; 
-        } else {
-            displayTop.textContent += " =";
-            const numArray = categorizeString(displayTop);
-            const result = operate(numArray[0], numArray[1], numArray[2]);
-            displayBot.textContent = result;
-        }; 
-    };
- });
-
-const btnAdd = document.querySelector('#add');
-btnAdd.addEventListener('click', () => {
-    const numArray = displayTop.textContent.split(" ");
-    if (numArray[0] != undefined &&
-        numArray[1] != undefined &&
-        numArray[2] != undefined &&
-        numArray[2] != "") { //an empty array is created when the string ends with the split element
-        btnEqual.click(); 
-    }
-    if (displayTop.textContent.endsWith("=")) {
-        displayTop.textContent = displayBot.textContent + " + ";
-    } else if (isOperatorPresent(displayTop)) {
-        displayTop.textContent = displayTop.textContent.slice(0, -3)
-        displayTop.textContent += " + ";  
-    } else displayTop.textContent += " + ";    
- });
- 
