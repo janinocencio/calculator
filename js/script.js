@@ -56,7 +56,7 @@ function performOperation(displayTop, displayBot, operator) {
 };
 
 function resetDisplay(displayTop, displayBot) {
-    if (isEndingWithOperator(displayTop)) displayBot.textContent = "0";
+    if (isEndingWithOperator(displayTop)) displayBot.textContent = "0"; //reset to 0 for removeZeroDefault
     if (displayTop.textContent.endsWith("=")) {
         displayTop.textContent = "";
         displayBot.textContent = "0";
