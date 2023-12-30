@@ -133,14 +133,17 @@ btnDot.addEventListener('click', () => {
         } else if (isEndingWithOperator(displayTop)) {
             displayBot.textContent = "0.";
             displayTop.textContent += "0.";
-        } else if (displayTop.textContent.includes("=")) {
+        } else if (displayTop.textContent.endsWith("=")) {
             displayBot.textContent = "0.";
             displayTop.textContent = "0.";
         } else displayTop.textContent += ".";
     } else if (isEndingWithOperator(displayTop)) {
         displayBot.textContent = "0.";
         displayTop.textContent += "0.";
-    }  
+    } else if (displayTop.textContent.endsWith("=")) {
+        displayBot.textContent = "0.";
+        displayTop.textContent = "0.";
+    } 
 });
 
 const btnZero = document.querySelector('#zero');
