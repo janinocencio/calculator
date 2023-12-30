@@ -1,3 +1,5 @@
+/******** General Functions Starts Here ********/
+
 function add(a,b) {
     return Math.round((+a + +b) * 1e12) / 1e12;
 };
@@ -67,7 +69,15 @@ function removeZeroDefault(displayText) {
     if (displayText.textContent === "0") displayText.textContent = "";
 };
 
-/******** Functions Ends Here ********/
+/******** General Functions Ends Here ********/
+
+
+/******** Button Functions Starts Here ********/
+
+
+
+/******** General Functions Ends Here ********/
+
 
 const displayTop = document.querySelector('#display-top > p');
 const displayBot = document.querySelector('#display-bot > p');
