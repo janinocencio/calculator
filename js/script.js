@@ -21,17 +21,17 @@ function operate(a,operator,b) {
     if (operator === "÷") return divide(a,b);
 };
 
-function categorizeString(displayTop) {
-    if (displayTop.textContent.includes("+") ||
-        displayTop.textContent.includes("-") ||
-        displayTop.textContent.includes("x") ||
-        displayTop.textContent.includes("÷")) {
-        return displayTop.textContent.split(" "); //returns array
+function categorizeString(displayText) {
+    if (displayText.textContent.includes("+") ||
+        displayText.textContent.includes("-") ||
+        displayText.textContent.includes("x") ||
+        displayText.textContent.includes("÷")) {
+        return displayText.textContent.split(" "); //returns array
     };
 };
 
-function removeZeroDefault(displayBot) {
-    if (displayBot.textContent === "0") displayBot.textContent = "";
+function removeZeroDefault(displayText) {
+    if (displayText.textContent === "0") displayText.textContent = "";
 };
 
 function resetDisplay(displayTop, displayBot) {
@@ -42,11 +42,11 @@ function resetDisplay(displayTop, displayBot) {
     };
 };
 
-function isOperatorPresent(displayTop) {
-    if (displayTop.textContent.endsWith(" + ") ||
-        displayTop.textContent.endsWith(" - ") ||
-        displayTop.textContent.endsWith(" x ") ||
-        displayTop.textContent.endsWith(" ÷ ")) {
+function isEndingWithOperator(displayText) {
+    if (displayText.textContent.endsWith(" + ") ||
+        displayText.textContent.endsWith(" - ") ||
+        displayText.textContent.endsWith(" x ") ||
+        displayText.textContent.endsWith(" ÷ ")) {
         return true
     };
 };
@@ -92,7 +92,7 @@ btnDivide.addEventListener('click', () => {
     }
     if (displayTop.textContent.endsWith("=")) {
         displayTop.textContent = displayBot.textContent + " ÷ ";
-    } else if (isOperatorPresent(displayTop)) {
+    } else if (isEndingWithOperator(displayTop)) {
         displayTop.textContent = displayTop.textContent.slice(0, -3)
         displayTop.textContent += " ÷ ";  
     } else displayTop.textContent += " ÷ "; 
@@ -109,7 +109,7 @@ btnMultiply.addEventListener('click', () => {
     }
     if (displayTop.textContent.endsWith("=")) {
         displayTop.textContent = displayBot.textContent + " x ";
-    } else if (isOperatorPresent(displayTop)) {
+    } else if (isEndingWithOperator(displayTop)) {
         displayTop.textContent = displayTop.textContent.slice(0, -3)
         displayTop.textContent += " x ";  
     } else displayTop.textContent += " x "; 
@@ -126,7 +126,7 @@ btnSubtract.addEventListener('click', () => {
     }
     if (displayTop.textContent.endsWith("=")) {
         displayTop.textContent = displayBot.textContent + " - ";
-    } else if (isOperatorPresent(displayTop)) {
+    } else if (isEndingWithOperator(displayTop)) {
         displayTop.textContent = displayTop.textContent.slice(0, -3)
         displayTop.textContent += " - ";  
     } else displayTop.textContent += " - "; 
@@ -143,7 +143,7 @@ btnAdd.addEventListener('click', () => {
     }
     if (displayTop.textContent.endsWith("=")) {
         displayTop.textContent = displayBot.textContent + " + ";
-    } else if (isOperatorPresent(displayTop)) {
+    } else if (isEndingWithOperator(displayTop)) {
         displayTop.textContent = displayTop.textContent.slice(0, -3)
         displayTop.textContent += " + ";  
     } else displayTop.textContent += " + ";    
@@ -152,7 +152,7 @@ btnAdd.addEventListener('click', () => {
 const btnEqual = document.querySelector('#equal');
 btnEqual.addEventListener('click', () => {
     if (displayTop.textContent.includes("=") === false) {
-        if (isOperatorPresent(displayTop)) {
+        if (isEndingWithOperator(displayTop)) {
             displayTop.textContent = displayTop.textContent.slice(0, -3)
             displayTop.textContent += " ="; 
         } else {
@@ -170,14 +170,14 @@ btnDot.addEventListener('click', () => {
         displayBot.textContent += ".";
         if (displayTop.textContent === "") {
             displayTop.textContent += "0."
-        } else if (isOperatorPresent(displayTop)) {
+        } else if (isEndingWithOperator(displayTop)) {
             displayBot.textContent = "0.";
             displayTop.textContent += "0.";
         } else if (displayTop.textContent.includes("=")) {
             displayBot.textContent = "0.";
             displayTop.textContent = "0.";
         } else displayTop.textContent += ".";
-    } else if (isOperatorPresent(displayTop)) {
+    } else if (isEndingWithOperator(displayTop)) {
         displayBot.textContent = "0.";
         displayTop.textContent += "0.";
     }  
