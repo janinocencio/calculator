@@ -52,7 +52,19 @@ function isEndingWithOperator(displayText) {
 };
 
 function performOperation(displayTop, displayBot, operator) {
-    
+    const numArray = displayTop.textContent.split(" ");
+    if (numArray[0] != undefined &&
+        numArray[1] != undefined &&
+        numArray[2] != undefined &&
+        numArray[2] != "") { //an empty array is created when the string ends with the split element
+        btnEqual.click(); 
+    }
+    if (displayTop.textContent.endsWith("=")) {
+        displayTop.textContent = displayBot.textContent + operator;
+    } else if (isEndingWithOperator(displayTop)) {
+        displayTop.textContent = displayTop.textContent.slice(0, -3)
+        displayTop.textContent += operator;  
+    } else displayTop.textContent += operator;
 };
 
 const displayTop = document.querySelector('#display-top > p');
@@ -77,70 +89,22 @@ btnDelete.addEventListener('click', () => {
 
 const btnDivide = document.querySelector('#divide');
 btnDivide.addEventListener('click', () => {
-    const numArray = displayTop.textContent.split(" ");
-    if (numArray[0] != undefined &&
-        numArray[1] != undefined &&
-        numArray[2] != undefined &&
-        numArray[2] != "") { //an empty array is created when the string ends with the split element
-        btnEqual.click(); 
-    }
-    if (displayTop.textContent.endsWith("=")) {
-        displayTop.textContent = displayBot.textContent + " ÷ ";
-    } else if (isEndingWithOperator(displayTop)) {
-        displayTop.textContent = displayTop.textContent.slice(0, -3)
-        displayTop.textContent += " ÷ ";  
-    } else displayTop.textContent += " ÷ "; 
+    performOperation(displayTop, displayBot, " ÷ ");
 });
 
 const btnMultiply = document.querySelector('#multiply');
 btnMultiply.addEventListener('click', () => {
-    const numArray = displayTop.textContent.split(" ");
-    if (numArray[0] != undefined &&
-        numArray[1] != undefined &&
-        numArray[2] != undefined &&
-        numArray[2] != "") { //an empty array is created when the string ends with the split element
-        btnEqual.click(); 
-    }
-    if (displayTop.textContent.endsWith("=")) {
-        displayTop.textContent = displayBot.textContent + " x ";
-    } else if (isEndingWithOperator(displayTop)) {
-        displayTop.textContent = displayTop.textContent.slice(0, -3)
-        displayTop.textContent += " x ";  
-    } else displayTop.textContent += " x "; 
+    performOperation(displayTop, displayBot, " x ");
 });
 
 const btnSubtract = document.querySelector('#subtract');
 btnSubtract.addEventListener('click', () => {
-    const numArray = displayTop.textContent.split(" ");
-    if (numArray[0] != undefined &&
-        numArray[1] != undefined &&
-        numArray[2] != undefined &&
-        numArray[2] != "") { //an empty array is created when the string ends with the split element
-        btnEqual.click(); 
-    }
-    if (displayTop.textContent.endsWith("=")) {
-        displayTop.textContent = displayBot.textContent + " - ";
-    } else if (isEndingWithOperator(displayTop)) {
-        displayTop.textContent = displayTop.textContent.slice(0, -3)
-        displayTop.textContent += " - ";  
-    } else displayTop.textContent += " - "; 
+    performOperation(displayTop, displayBot, " - ");
 });
 
 const btnAdd = document.querySelector('#add');
 btnAdd.addEventListener('click', () => {
-    const numArray = displayTop.textContent.split(" ");
-    if (numArray[0] != undefined &&
-        numArray[1] != undefined &&
-        numArray[2] != undefined &&
-        numArray[2] != "") { //an empty array is created when the string ends with the split element
-        btnEqual.click(); 
-    }
-    if (displayTop.textContent.endsWith("=")) {
-        displayTop.textContent = displayBot.textContent + " + ";
-    } else if (isEndingWithOperator(displayTop)) {
-        displayTop.textContent = displayTop.textContent.slice(0, -3)
-        displayTop.textContent += " + ";  
-    } else displayTop.textContent += " + ";    
+    performOperation(displayTop, displayBot, " + ");
 });
  
 const btnEqual = document.querySelector('#equal');
