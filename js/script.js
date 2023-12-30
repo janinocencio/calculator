@@ -30,18 +30,6 @@ function categorizeString(displayText) {
     };
 };
 
-function removeZeroDefault(displayText) {
-    if (displayText.textContent === "0") displayText.textContent = "";
-};
-
-function resetDisplay(displayTop, displayBot) {
-    if (displayTop.textContent.endsWith(" ")) displayBot.textContent = "0";
-    if (displayTop.textContent.endsWith("=")) {
-        displayTop.textContent = "";
-        displayBot.textContent = "0";
-    };
-};
-
 function isEndingWithOperator(displayText) {
     if (displayText.textContent.endsWith(" + ") ||
         displayText.textContent.endsWith(" - ") ||
@@ -66,6 +54,20 @@ function performOperation(displayTop, displayBot, operator) {
         displayTop.textContent += operator;  
     } else displayTop.textContent += operator;
 };
+
+function resetDisplay(displayTop, displayBot) {
+    if (isEndingWithOperator(displayTop)) displayBot.textContent = "0";
+    if (displayTop.textContent.endsWith("=")) {
+        displayTop.textContent = "";
+        displayBot.textContent = "0";
+    };
+};
+
+function removeZeroDefault(displayText) {
+    if (displayText.textContent === "0") displayText.textContent = "";
+};
+
+/******** Functions Ends Here ********/
 
 const displayTop = document.querySelector('#display-top > p');
 const displayBot = document.querySelector('#display-bot > p');
