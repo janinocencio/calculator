@@ -51,14 +51,8 @@ function isEndingWithOperator(displayText) {
     };
 };
 
-function operatorConditions(displayTop, displayBot, operator) {
-    if (displayTop.textContent.endsWith("=")) {
-        displayTop.textContent = displayBot.textContent + operator;
-    }
-    if (Number.isFinite(displayTop.textContent)){
-        btnEqual.click();
-        displayTop.textContent = displayBot.textContent + operator;
-    };
+function performOperation(displayTop, displayBot, operator) {
+    
 };
 
 const displayTop = document.querySelector('#display-top > p');
