@@ -41,14 +41,17 @@ function isEndingWithOperator(displayText) {
     };
 };
 
+function isArrayDefined(myArray) {
+    if (myArray[0] != undefined &&
+        myArray[1] != undefined &&
+        myArray[2] != undefined &&
+        myArray[2] != "") { //an empty array is created when the string ends with the split element
+        return true}; 
+}
+
 function performOperation(displayTop, displayBot, operator) {
     const numArray = displayTop.textContent.split(" ");
-    if (numArray[0] != undefined &&
-        numArray[1] != undefined &&
-        numArray[2] != undefined &&
-        numArray[2] != "") { //an empty array is created when the string ends with the split element
-        btnEqual.click(); 
-    }
+    if (isArrayDefined(numArray)) btnEqual.click(); 
     if (displayTop.textContent.endsWith("=")) {
         displayTop.textContent = displayBot.textContent + operator;
     } else if (isEndingWithOperator(displayTop)) {
@@ -81,8 +84,12 @@ function handleClear() {
 
 function handleDelete() {
     if (displayBot.textContent != "0") {
+        if (isEndingWithOperator(displayTop) || displayTop.textContent.endsWith("=")) {
+            displayBot.textContent = displayBot.textContent.slice(0,-1);
+        } else {
         displayBot.textContent = displayBot.textContent.slice(0,-1);
         displayTop.textContent = displayTop.textContent.slice(0,-1);
+        };
     };
     if (displayBot.textContent === "") {
         displayBot.textContent = "0";
@@ -92,7 +99,8 @@ function handleDelete() {
 function handleEqual() {
     if (displayTop.textContent.includes("=") === false) {
         if (isEndingWithOperator(displayTop)) {
-            displayTop.textContent = displayTop.textContent.slice(0, -3)
+            displayTop.textContent = displayTop.textContent.slice(0, -3);
+            displayBot.textContent = displayTop.textContent;
             displayTop.textContent += " ="; 
         } else {
             displayTop.textContent += " =";
@@ -100,6 +108,10 @@ function handleEqual() {
             const result = operate(numArray[0], numArray[1], numArray[2]);
             displayBot.textContent = result;
         }; 
+    } else {
+        const numArray = categorizeString(displayTop);
+        const result = operate(numArray[0], numArray[1], numArray[2]);
+        displayBot.textContent = result;
     };
 };
 
