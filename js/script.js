@@ -129,10 +129,12 @@ function handleNumber(displayTop, displayBot, num) {
     displayTop.textContent += num;
     removeZeroDefault(displayBot); 
     displayBot.textContent += num; 
-}
+};
 
 /******** Button Functions Ends Here ********/
 
+
+/******** Button Click Events Starts Here ********/
 
 const displayTop = document.querySelector('#display-top > p');
 const displayBot = document.querySelector('#display-bot > p');
@@ -218,3 +220,12 @@ const btnNine = document.querySelector('#nine');
 btnNine.addEventListener('click', () => {
     handleNumber(displayTop, displayBot, "9");
 });
+
+/******** Button Click Events Ends Here ********/
+
+
+/******** Keydown Events Starts Here ********/
+
+
+
+/******** Keydown Events Starts Here ********/
