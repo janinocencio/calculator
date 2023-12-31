@@ -226,6 +226,25 @@ btnNine.addEventListener('click', () => {
 
 /******** Keydown Events Starts Here ********/
 
-
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') handleClear();
+    if (event.key === 'Delete' || event.key === 'Backspace') handleDelete();
+    if (event.key === '/') performOperation(displayTop, displayBot, " ÷ ");
+    if (event.key === '*') performOperation(displayTop, displayBot, " x ");
+    if (event.key === '-') performOperation(displayTop, displayBot, " - ");
+    if (event.key === '+') performOperation(displayTop, displayBot, " + ");
+    if (event.key === '=' || event.key === 'Enter') handleEqual();
+    if (event.key === '.') handleDot();
+    if (event.key === '0') handleNumber(displayTop, displayBot, "0");
+    if (event.key === '1') handleNumber(displayTop, displayBot, "1");
+    if (event.key === '2') handleNumber(displayTop, displayBot, "2");
+    if (event.key === '3') handleNumber(displayTop, displayBot, "3");
+    if (event.key === '4') handleNumber(displayTop, displayBot, "4");
+    if (event.key === '5') handleNumber(displayTop, displayBot, "5");
+    if (event.key === '6') handleNumber(displayTop, displayBot, "6");
+    if (event.key === '7') handleNumber(displayTop, displayBot, "7");
+    if (event.key === '8') handleNumber(displayTop, displayBot, "8");
+    if (event.key === '9') handleNumber(displayTop, displayBot, "9");
+});
 
 /******** Keydown Events Starts Here ********/
