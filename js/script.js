@@ -46,8 +46,9 @@ function isArrayDefined(myArray) {
         myArray[1] != undefined &&
         myArray[2] != undefined &&
         myArray[2] != "") { //an empty array is created when the string ends with the split element
-        return true}; 
-}
+        return true
+    }; 
+};
 
 function performOperation(displayTop, displayBot, operator) {
     const numArray = displayTop.textContent.split(" ");
