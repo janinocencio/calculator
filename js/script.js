@@ -233,7 +233,10 @@ document.addEventListener('keydown', function(event) {
     if (event.key === '*') performOperation(displayTop, displayBot, " x ");
     if (event.key === '-') performOperation(displayTop, displayBot, " - ");
     if (event.key === '+') performOperation(displayTop, displayBot, " + ");
-    if (event.key === '=' || event.key === 'Enter') handleEqual();
+    if (event.key === '=' || event.key === 'Enter') {
+        event.preventDefault(); //avoid pressing the focused button
+        handleEqual();
+    };
     if (event.key === '.') handleDot();
     if (event.key === '0') handleNumber(displayTop, displayBot, "0");
     if (event.key === '1') handleNumber(displayTop, displayBot, "1");
